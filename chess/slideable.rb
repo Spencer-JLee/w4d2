@@ -31,20 +31,18 @@ module Slidable
     moves = []
     row_idx = self.pos.first
     col_idx = self.pos.last
-    if move_horizontal
+    if move_horizontal?
       HORIZONTAL_DIRS.each do |pos|
         moves << [row_idx + pos.first, col_idx + pos.last]
       end
     end
-    if move_diag
+    if move_diag?
       DIAGONAL_DIRS.each do |pos|
         moves << [row_idx + pos.first, col_idx + pos.last]
       end
     end
     moves
-
     # use move_dirs
-    
   end
 
   
@@ -56,8 +54,8 @@ module Slidable
     # check what class is via conditional, tell moves to ignore constants
     #use is_a?() to check class (i.e. a rook vs a bishop)
     #use conditional to tell moves to ignore either HORIZONATL or DIAGONALS
-    move_horizontal = true
-    move_diag = true
+    move_horizontal? = false
+    move_diag? = false
   end
 
   def grow_unblocked_moves_in_dir(dx,dy)
