@@ -22,14 +22,28 @@ class Board
   end
 
   def [](pos)
+    # debugger
+    row = pos.first
+    col = pos.last
+    @board[row][col]
   end
-
-  def []=(pos)
+  
+  def []=(pos, value)
+    row = pos.first
+    col = pos.last
+    @board[row][col] = value
   end
 
   def move_piece(start_pos, end_pos)
+    # there is no piece at start_pos or
+    if self[start_pos].nil?
+      raise 'no piece to move'
+    end
+    piece = self[start_pos] 
+    self[start_pos] = nil
+    self[end_pos] = piece
   end
 
 end
 
-p b = Board.new
+# p b = Board.new
