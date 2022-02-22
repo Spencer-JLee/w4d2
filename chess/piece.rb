@@ -1,32 +1,33 @@
 class Piece
-  # def initialize(color, board, pos)
-  #   @color = color
-  #   @board = board
-  #   @pos = pos
-  # end
 
-  # def to_s
+  def initialize(color, board, pos)
+    @color = color
+    @board = board
+    @pos = pos
+  end
 
-  # end
+  def to_s
 
-  # def empty?
+  end
 
-  # end
+  def empty?
 
-  # def valid_moves
+  end
 
-  # end
+  def valid_moves
 
-  # def pos=(val)
+  end
 
-  # end
+  def pos=(val)
+    board[pos] = value
+  end
 
-  # def Symbol
+  def Symbol
 
-  # end
+  end
 
-  # private
-  # def move_into_check?(end_pos)
+  private
+  def move_into_check?(end_pos)
 
-  # end
+  end
 end
