@@ -7,15 +7,16 @@ class Board
   def initialize
     @board = Array.new(8) { Array.new(8) }
     build_board
-    debugger
+    # debugger
   end
   
   def build_board
-    @board.map.with_index do |row, idx|
+    (0..8).each do |idx|
       if idx == 0 || idx == 1 || idx == 6 || idx == 7
-        return row.map { |ele| Piece.new }
-        # debugger
-        # p row
+        (0..8).each do |j|
+          @board[idx][j] = Piece.new
+        end
+        #wtf is going with Array.each?
       end
     end
   end
@@ -31,4 +32,4 @@ class Board
 
 end
 
-b = Board.new
+p b = Board.new
