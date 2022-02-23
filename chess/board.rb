@@ -17,6 +17,7 @@ class Board
   end
 
   # Piece#initialize(color, board, pos)
+  # []
   def build_board
     @rows = Array.new(8) { Array.new(8, null_piece) }
     @rows[0].map!.with_index do |piece, i|

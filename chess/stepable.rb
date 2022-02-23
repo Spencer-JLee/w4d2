@@ -1,33 +1,25 @@
 module Stepable
 
-  KNIGHT_DIRS = [[1,2], [-1,2], [2,1], [-2,1], [2,-1], [-2,-1], [1,-2], [-1,-2]]
-  KING_DIRS = [[1,1], [0,1], [-1,1], [-1,0], [1,0], [-1,-1], [0,-1], [1, -1]]
 
   def moves
     moves = []
-    row_idx = self.pos.first
-    col_idx = self.pos.last
-
-    if is_knight?
-      KNIGHT_DIRS.each do |dir|
-        moves << [row_idx + dir.first, col_idx + dir.last]
+    row, col = self.pos
+    move_diffs.each do |move|
+      new_row = row + move[0]
+      new_col = col + move[1]
+      if new_row < 0 || new_row > 7 || new_col < 0 || new_col > 7
+        next
+      elsif self.board[new_row, new_col].is_a?(NullPiece) || self.board[new_row, new_col].color != self.color
+        moves << [new_row, new_col]
       end
-    end
-
-    if is_king?
-      KING_DIRS.each do |dir|
-        moves << [row_idx + dir.first, col_idx + dir.last]
-      end
-    end
+    end 
     moves
   end
-
 
   private
 
   def move_diffs
-    # is_knight? = false
-    # is_king? = false
+    
   end
 
 end

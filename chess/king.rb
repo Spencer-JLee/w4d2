@@ -4,8 +4,7 @@ require_relative 'stepable.rb'
 class King < Piece
   include Stepable
 
-  # def move_diffs
-  #   is_knight? = false
-  #   is_king? = true
-  # end
+  def move_diffs
+    [[1,1], [0,1], [-1,1], [-1,0], [1,0], [-1,-1], [0,-1], [1, -1]]
+  end
 end

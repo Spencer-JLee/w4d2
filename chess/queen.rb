@@ -4,6 +4,6 @@ require_relative 'slideable.rb'
 class Queen < Piece 
   include Slidable 
   def move_dirs
-    'horizontal and diagonal'
+    horizonal_dirs + diagonal_dirs
   end
 end
