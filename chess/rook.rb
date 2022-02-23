@@ -4,9 +4,9 @@ require_relative 'slideable.rb'
 class Rook < Piece
   include Slidable
 
-  # def initialize
-  #   super
-  # end
+  def symbol
+    :r
+  end
 
   private
 

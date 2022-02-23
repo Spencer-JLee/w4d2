@@ -41,24 +41,22 @@ class Board
   end
 
   def combine_board
-    # (2..5).each do |idx|
-    #   @rows[idx].concat(build_null)
-    # end
-    @rows.each_with_index do |row, i|
+
+    @rows.map!.with_index do |row, i|
       if i == 0
-        @rows[i] = build_back.each_with_index do |piece, j|
+        @rows[i] = build_back.map!.with_index do |piece, j|
           piece.new(:black, @rows, [0, j])
         end
       elsif i == 1
-        @rows[i] = build_pawn.each_with_index do |pawn, j|
+        @rows[i] = build_pawn.map!.with_index do |pawn, j|
           pawn.new(:black, @rows, [1, j])
         end
       elsif i == 7
-        @rows[i] = build_back.each_with_index do |piece, j|
+        @rows[i] = build_back.map!.with_index do |piece, j|
           piece.new(:white, @rows, [7, j])
         end
       elsif i == 6
-        @rows[i] = build_pawn.each_with_index do |pawn, j|
+        @rows[i] = build_pawn.map!.with_index do |pawn, j|
           pawn.new(:white, @rows, [6, j])
         end
       else
@@ -90,5 +88,3 @@ class Board
   end
 
 end
-
-# p b = Board.new
