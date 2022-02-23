@@ -7,7 +7,7 @@ class Pawn < Piece
   # ATTACK_DIRS = []
 
   def symbol 
-
+    
   end
 
   def moves

@@ -5,13 +5,14 @@ module Slidable
     [-1, 0],
     [0, 1],
     [0, -1]
-].freeze
+  ].freeze
+  
   DIAGONAL_DIRS = [
     [1, 1],
     [-1, -1],
     [-1, 1],
     [1, -1]
-].freeze
+  ].freeze
 
   # use board to know when to stop sliding
   # stop sliding when blocked by same color

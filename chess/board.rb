@@ -9,67 +9,71 @@ require_relative 'rook.rb'
 require 'byebug'
 
 class Board
-  attr_reader :rows, :null_piece
+  attr_accessor :rows, :null_piece
 
   def initialize
-    @rows = build_board
     @null_piece = NullPiece.instance
+    @rows = build_board
+    # @black_row_back = @rows[0]
+    # @black_row_pawn = @rows[1]
+    # @white_row_back = @rows[7]
+    # @white_row_pawn = @rows[6]
+    combine_board
   end
 
   # Piece#initialize(color, board, pos)
   # []
   def build_board
-    @rows = Array.new(8) { Array.new(8, null_piece) }
-    @rows[0].map!.with_index do |piece, i|
-      if i == 0 || i == 7
-        piece = Rook.new(:black, @rows, [0,i])
-      elsif i == 1 || i == 6
-        piece = Knight.new(:black, @rows, [0, i])
-      elsif i == 2 || i == 5
-        piece = Bishop.new(:black, @rows, [0, i])
-      elsif i == 3
-        piece = Queen.new(:black, @rows, [0, i])
-      elsif i == 4
-        piece = King.new(:black, @rows, [0, i])
-      end
-    end
-
-    @rows[7].map!.with_index do |piece, i|
-      if i == 0 || i == 7
-        piece = Rook.new(:white, @rows, [7,i])
-      elsif i == 1 || i == 6
-        piece = Knight.new(:white, @rows, [7, i])
-      elsif i == 2 || i == 5
-        piece = Bishop.new(:white, @rows, [7, i])
-      elsif i == 3
-        piece = Queen.new(:white, @rows, [7, i])
-      elsif i == 4
-        piece = King.new(:white, @rows, [7, i])
-      end
-    end
-
-    @rows[6].map!.with_index { |piece, i| piece = Pawn.new(:white, @rows, [6, i])}
-
-    @rows[1].map!.with_index { |piece, i| piece = Pawn.new(:black, @rows, [1, i])}
-    # (0..8).each do |idx|
-    #   if idx == 0 || idx == 1 || idx == 6 || idx == 7
-    #     (0..8).each do |j|
-    #       @board[idx][j] = Piece.new
-    #     end
-        #wtf is going with Array.each?
-    #   end
-    # end
+    Array.new(8) { Array.new(8) }
+    # combine_board
   end
 
-  def build_pieces
+  def build_pawn
+    Array.new(8, Pawn)
+  end
 
+  def build_null
+    Array.new(8, null_piece)
+  end
+
+  def build_back
+    [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+  end
+
+  def combine_board
+    # (2..5).each do |idx|
+    #   @rows[idx].concat(build_null)
+    # end
+    @rows.each_with_index do |row, i|
+      if i == 0
+        @rows[i] = build_back.each_with_index do |piece, j|
+          piece.new(:black, @rows, [0, j])
+        end
+      elsif i == 1
+        @rows[i] = build_pawn.each_with_index do |pawn, j|
+          pawn.new(:black, @rows, [1, j])
+        end
+      elsif i == 7
+        @rows[i] = build_back.each_with_index do |piece, j|
+          piece.new(:white, @rows, [7, j])
+        end
+      elsif i == 6
+        @rows[i] = build_pawn.each_with_index do |pawn, j|
+          pawn.new(:white, @rows, [6, j])
+        end
+      else
+        @rows[i] = build_null
+      end
+    end
+
+    #black
   end
 
   def [](pos)
     row, col = pos
     @rows[row][col]
   end
-  
+
   def []=(pos, value)
     row, col = pos
     @rows[row][col] = value
