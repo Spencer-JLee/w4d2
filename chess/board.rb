@@ -14,18 +14,11 @@ class Board
   def initialize
     @null_piece = NullPiece.instance
     @rows = build_board
-    # @black_row_back = @rows[0]
-    # @black_row_pawn = @rows[1]
-    # @white_row_back = @rows[7]
-    # @white_row_pawn = @rows[6]
     combine_board
   end
 
-  # Piece#initialize(color, board, pos)
-  # []
   def build_board
     Array.new(8) { Array.new(8) }
-    # combine_board
   end
 
   def build_pawn
@@ -63,8 +56,6 @@ class Board
         @rows[i] = build_null
       end
     end
-
-    #black
   end
 
   def [](pos)
@@ -85,6 +76,14 @@ class Board
     piece = self[start_pos] 
     self[start_pos] = null_piece
     self[end_pos] = piece
+  end
+
+  def valid_pos?(pos)
+    row, col = pos
+    if row < 0 || row > 7 || col < 0 || col > 7
+      return false
+    end
+    true
   end
 
 end
