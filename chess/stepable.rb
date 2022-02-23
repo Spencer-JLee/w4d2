@@ -26,8 +26,8 @@ module Stepable
   private
 
   def move_diffs
-    is_knight? = false
-    is_king? = false
+    # is_knight? = false
+    # is_king? = false
   end
 
 end

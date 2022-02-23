@@ -1,10 +1,19 @@
 require_relative 'piece.rb'
+require 'Singleton'
 
 class NullPiece < Piece
-  include Singleton
 
+  include Singleton
+  
+  attr_reader :symbol
+  
   def initialize
-    super
+    @symbol = " "
+    @color = :null
+  end
+
+  def moves
+    return []
   end
 
 

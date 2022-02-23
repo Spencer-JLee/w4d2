@@ -26,11 +26,12 @@ module Slidable
     return DIAGONAL_DIRS
   end
 
+  # return an array of places a Piece can move to
+  # use move_dirs
   def moves
-    # return an array of places a Piece can move to
     moves = []
-    row_idx = self.pos.first
-    col_idx = self.pos.last
+    row, col = self.pos
+    
     if move_horizontal?
       HORIZONTAL_DIRS.each do |pos|
         moves << [row_idx + pos.first, col_idx + pos.last]
@@ -42,20 +43,19 @@ module Slidable
       end
     end
     moves
-    # use move_dirs
   end
 
   
   
   private 
-
+  # why/how to call move_dirs from moves, and why is it overwritten by subclass?
   def move_dirs
     # overwritten by subclass
     # check what class is via conditional, tell moves to ignore constants
     #use is_a?() to check class (i.e. a rook vs a bishop)
     #use conditional to tell moves to ignore either HORIZONATL or DIAGONALS
-    move_horizontal? = false
-    move_diag? = false
+    # move_horizontal? = false
+    # move_diag? = false
   end
 
   def grow_unblocked_moves_in_dir(dx,dy)
